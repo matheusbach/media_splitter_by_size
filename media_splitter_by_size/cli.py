@@ -125,16 +125,31 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _clean_path(raw: str) -> Path:
+    """Clean a user-provided path string (handles drag-and-drop quotes, escapes, ~)."""
+    s = raw.strip()
+    # Strip surrounding quotes (drag-and-drop / copy-paste)
+    if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
+        s = s[1:-1]
+    # Handle backslash-escaped spaces (e.g. /my\ file.mp4)
+    s = s.replace("\\ ", " ")
+    # Expand ~ to home
+    return Path(s).expanduser().resolve()
+
+
 def interactive_mode(console: Console) -> None:
     """Run interactive mode with guided user prompts."""
     console.print()
     console.print("[bold cyan]Media Splitter by Size - Interactive Mode[/bold cyan]")
     console.print("[dim]Answer the questions below to configure the split.[/dim]\n")
 
-    # Input file
+    # Input file – use raw input() to avoid Rich markup parsing on paths
     while True:
-        input_file = Prompt.ask("[bold]Input file path[/bold]")
-        input_path = Path(input_file).resolve()
+        console.print("[bold]Input file path:[/bold] ", end="")
+        input_raw = input().strip()
+        if not input_raw:
+            continue
+        input_path = _clean_path(input_raw)
         if input_path.exists():
             break
         console.print(f"[red]File not found: {input_path}[/red]")
@@ -153,11 +168,10 @@ def interactive_mode(console: Console) -> None:
             console.print(f"[red]{e}[/red]")
 
     # Output directory
-    output_dir_str = Prompt.ask(
-        "[bold]Output directory[/bold]",
-        default=str(input_path.parent),
-    )
-    output_dir = Path(output_dir_str).resolve()
+    default_output = str(input_path.parent)
+    console.print(f"[bold]Output directory[/bold] [dim](default: {default_output})[/dim]: ", end="")
+    output_raw = input().strip()
+    output_dir = _clean_path(output_raw) if output_raw else Path(default_output)
 
     # Codec options
     use_custom_codecs = Confirm.ask(
