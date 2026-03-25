@@ -1,0 +1,43 @@
+[project]
+name = "media-splitter-by-size"
+version = "1.0.0"
+description = "Split any media file into parts based on a maximum file size, preserving all tracks and sync"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+authors = [
+    { name = "Matheus Bach", email = "matheusbach@users.noreply.github.com" },
+]
+keywords = ["media", "splitter", "ffmpeg", "video", "audio", "split"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Multimedia :: Video",
+    "Topic :: Multimedia :: Sound/Audio",
+]
+dependencies = [
+    "rich>=14.0.0",
+]
+
+[project.scripts]
+media-splitter = "media_splitter_by_size.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/matheusbach/media_splitter_by_size"
+Repository = "https://github.com/matheusbach/media_splitter_by_size"
+Issues = "https://github.com/matheusbach/media_splitter_by_size/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["media_splitter_by_size"]

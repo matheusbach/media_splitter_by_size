@@ -1,0 +1,41 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# UV lock
+uv.lock
+
+# Test outputs
+test_output/
+test_output_full/
+test_clip.mp4
+
+# Media files (do not commit large media)
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.webm
+*.ts
+*.flv
+*.m4a
+*.wav
+*.flac
+*.ogg
+*.mp3
+
+# IDE
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+test.txt
+msbs.zip

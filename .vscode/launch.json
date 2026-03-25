@@ -1,0 +1,56 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Media Splitter - CLI (default)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "media_splitter_by_size.cli",
+            "args": ["live.mp4", "-s", "500MB", "--overlap"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Media Splitter - CLI (custom codecs)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "media_splitter_by_size.cli",
+            "args": [
+                "live.mp4",
+                "-s", "500MB",
+                "--video-codec", "libx264",
+                "--audio-codec", "aac",
+                "-v"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Media Splitter - Interactive",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "media_splitter_by_size.cli",
+            "args": ["--interactive"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Media Splitter - main.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "args": ["live.mp4", "-s", "500MB"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Media Splitter - Version",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "media_splitter_by_size.cli",
+            "args": ["--version"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
